@@ -2,6 +2,14 @@ import { ChangeEvent, useState } from "react";
 import { parse } from 'yaml';
 import { QuestionParsed, QuestParam } from "../quiz/question";
 
+function download(text: string) {
+    const a = document.getElementById("a") as HTMLAnchorElement;
+    const file = new Blob([text], { type: "text/json" })
+    a.href = URL.createObjectURL(file)
+    a.download = "quiz.json"
+}
+
+
 type SettingsProps = {
     setQuestParam: (questParam: QuestParam) => void
 }
@@ -44,6 +52,10 @@ export default function Settings({ setQuestParam }: SettingsProps) {
         <div>
             <div>Загружено {questions.length} вопросов.</div>
             <div><input type="file" onChange={handleFileChange} /></div>
+            <button
+                onClick={() => download(JSON.stringify(questions, null, 2))}>
+                Создать JSON</button>
+            <a href="" id="a">Загрузить JSON</a>
             <div>Вариант: <input
                 type="number"
                 min={MIN_VARIANT}
@@ -51,11 +63,12 @@ export default function Settings({ setQuestParam }: SettingsProps) {
                 defaultValue={variant}
                 onChange={handleVariantChange}
             /></div>
-            <div>Время на вопрос: <input 
+            <div>Время на вопрос: <input
                 type="number"
                 min={0}
                 max={1000}
                 defaultValue={time}
+                onChange={handleTimeChange}
             /> секунд</div>
             <div><button onClick={handleGo}>Старт!</button></div>
         </div>

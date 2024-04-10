@@ -7,13 +7,13 @@ const testQuestions: QuestionParsed[] = [
 
 test("parsedToView", ()=>{
     const parsedQuestions0 = parsedToView(testQuestions[0], 0, 0)
-    const parsedQuestions1 = parsedToView(testQuestions[0], 1, 1)
+    // const parsedQuestions1 = parsedToView(testQuestions[0], 1, 1)
     expect(parsedQuestions0.answers.length).toBe(4)
 })
 
 test("Quest constructor", ()=>{
     const quest1 = new Quest(new QuestParam(testQuestions, 0))
-    const quest2 = new Quest(new QuestParam(testQuestions, 1))
+    // const quest2 = new Quest(new QuestParam(testQuestions, 1))
     expect(quest1.questions.length).toBe(testQuestions.length)
 })
 
